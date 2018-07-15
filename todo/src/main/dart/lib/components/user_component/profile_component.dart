@@ -36,7 +36,6 @@ class ProfileComponent implements OnInit{
 
   //Funktion zum updaten der User daten ( zZ nur Passwort )
   Future updateUser(String password) async {
-      currentUser.password = password;
 
       await userService.updateUser(currentUser, password);
       userList = await userService.getUserList();
