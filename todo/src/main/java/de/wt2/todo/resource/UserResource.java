@@ -88,16 +88,17 @@ public class UserResource extends BaseResource<User> {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{userID}/notes")
     public Note create(final Note t, @PathParam("userID") long userID) {
-		if (isAllowed(userID)) {
-			entityManager.persist(t);
-	        User user = entityManager.find(User.class, userID);
-	        t.setAuthorUser(user);
-	        t.setAuthor(user.getUsername());
-	        user.getNotes().add(t);
+	if (isAllowed(userID)) {
+		User user = entityManager.find(User.class, userID);
+		t.setAuthorUser(user);
+		t.setAuthor(user.getUsername());
+		t.setId(0);
+		user.getNotes().add(t);
 
-	        entityManager.merge(user);
-	        return t;
-		} else return null;
+			entityManager.persist(t);
+		entityManager.merge(user);
+		return t;
+	} else return null;
     }
 
 
