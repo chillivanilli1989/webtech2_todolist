@@ -30,6 +30,8 @@ class LoginComponent implements OnInit {
 
   bool loginAccepted = false;
   bool registering = false;
+  
+  String errorMessage = "";
 
   LoginComponent(this.userService, this.loginService);
 
@@ -67,6 +69,9 @@ class LoginComponent implements OnInit {
 
     if(currentUser != null) {
       loginAccepted = true;
+    }
+    else{
+      errorMessage = "Login Failed.";
     }
   }
 
